@@ -5,9 +5,6 @@ import PackageDescription
 
 let package = Package(
     name: "iCalendarParser",
-    platforms: [
-        .iOS(.v14),
-    ],
     products: [
         .library(
             name: "iCalendarParser",
