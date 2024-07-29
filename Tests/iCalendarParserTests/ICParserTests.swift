@@ -28,4 +28,23 @@ final class ICParserTests: XCTestCase {
         let calendar = sut.calendar(from: iCalString)
         XCTAssertEqual(calendar?.events.count, 295)
     }
+
+    func testICParserCategories() throws {
+        let iCalString = try getContents(of: "ufl-all-events", ext: "txt")
+        guard let calendar = sut.calendar(from: iCalString) else {
+            XCTFail("could not create calendar")
+            return
+        }
+
+        let uniqueCategories = calendar.events
+            .compactMap { $0.categories }
+            .flatMap { $0 }
+            .reduce(into: [String]()) { result, category in
+                if !result.contains(category) {
+                    result.append(category)
+                }
+            }
+
+        XCTAssertEqual(uniqueCategories.count, 19)
+    }
 }
