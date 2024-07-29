@@ -23,7 +23,7 @@ public struct ICEvent: ICComponentable {
     // https://www.rfc-editor.org/rfc/rfc5545#section-3.8.1.1))
     // var attachment: [ICAttachment]?
 
-    var categories: [String]?
+     public var categories: [String]?
 
     /// Defines the access classification for a calendar component.
     ///
