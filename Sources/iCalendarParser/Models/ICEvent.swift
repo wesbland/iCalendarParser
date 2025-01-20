@@ -3,8 +3,7 @@ import Foundation
 /// A grouping of component properties that describe an
 ///
 /// See more in [RFC 5545](https://www.rfc-editor.org/rfc/rfc5545#section-3.6.1)
-public struct ICEvent: ICComponentable {
-
+public struct ICEvent: ICComponentable, Identifiable {
     // MARK: - ICComponentable
 
     let type: ICComponentType = .event
@@ -186,6 +185,7 @@ public struct ICEvent: ICComponentable {
     /// See more in [RFC 5545](
     /// https://www.rfc-editor.org/rfc/rfc5545#section-3.8.4.7)
     public var uid: String
+    public var id: String { uid }
 
     /// Defines a Uniform Resource Locator (URL) associated with the iCalendar object.
     ///
