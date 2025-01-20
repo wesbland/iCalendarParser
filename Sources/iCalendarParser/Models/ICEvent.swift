@@ -243,3 +243,42 @@ extension ICEvent: Equatable {
         lhs.uid == rhs.uid
     }
 }
+
+extension ICEvent: Comparable {
+    public static func < (lhs: ICEvent, rhs: ICEvent) -> Bool {
+        if (lhs.dtStart == nil && rhs.dtStart != nil) {
+            return true
+        } else if (lhs.dtStart != nil && rhs.dtStart == nil) {
+            return false
+        } else if (lhs.dtStart == nil && rhs.dtStart == nil) {
+            return true // TODO - Check the alphbetization of the summary
+        } else {
+            if let leftStart = lhs.dtStart?.date, let rightStart = rhs.dtStart?.date {
+                if leftStart < rightStart {
+                    return true
+                } else if leftStart > rightStart {
+                    return false
+                } else {
+                    if (lhs.dtEnd == nil && rhs.dtEnd != nil) {
+                        return true
+                    } else if (lhs.dtEnd != nil && rhs.dtEnd == nil) {
+                        return false
+                    } else if (lhs.dtEnd == nil && rhs.dtEnd == nil) {
+                        return true // TODO - Check the alphbetization of the summary
+                    } else {
+                        if let leftEnd = lhs.dtEnd?.date, let rightEnd = rhs.dtEnd?.date {
+                            if leftEnd < rightEnd {
+                                return true
+                            } else if leftEnd > rightEnd {
+                                return false
+                            } else {
+                                return true // TODO - Check the alphbetization of the summary
+                            }
+                        }
+                    }
+                }
+            }
+            return true // TODO - How did we end up here?
+        }
+    }
+}
